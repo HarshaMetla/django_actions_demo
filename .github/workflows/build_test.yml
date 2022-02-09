@@ -24,7 +24,7 @@ jobs:
         python3 manage.py test
         
   job_3:
-      name:  building sqlmap image and pushing into repository
+      name:  building image and pushing into repository
       needs: test
       runs-on: ubuntu-latest
       steps:
