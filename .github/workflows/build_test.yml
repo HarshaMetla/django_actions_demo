@@ -32,8 +32,6 @@ jobs:
           - uses: actions/checkout@v2
           - name: Build the Docker image of sqlmap
             run: docker build -t manage.py .
-            
-            
           - name: uploading
           - uses: mr-smithers-excellent/docker-build-push@v5
             with:
