@@ -25,7 +25,7 @@ jobs:
         
         
   job_3:
-          name:  building sqlmap image and pushing into repository
+          name:  Building image and pushing into repository
           needs: test
           runs-on: ubuntu-latest
           steps:
