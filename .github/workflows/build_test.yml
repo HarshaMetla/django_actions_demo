@@ -23,19 +23,18 @@ jobs:
         cd myapp
         python3 manage.py test
         
-        
-  job_2:
-          name:  Building image and pushing into repository
-          needs: test
-          runs-on: ubuntu-latest
-          steps:
-          - uses: actions/checkout@v2
-          - name: Build the Docker image of sqlmap
-            run: docker build -t manage.py .
-          - name: uploading
-          - uses: mr-smithers-excellent/docker-build-push@v5
-            with:
-              image: harshametla/new
-              registry: docker.io
-              username: ${{ secrets.DOCKER_USERNAME }}
-              password: ${{ secrets.DOCKER_PASSWORD }}
+  job_3:
+      name:  building sqlmap image and pushing into repository
+      needs: test
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image 
+        run: docker build -f Dockerfile .
+      - name: uploading
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: harshametla/new
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
