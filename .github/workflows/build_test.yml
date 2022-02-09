@@ -33,14 +33,11 @@ jobs:
           - name: Build the Docker image of sqlmap
             run: docker build -t manage.py .
             
-  job_3:
-      name: uploading
-      needs: job_2
-      runs-on: ubuntu-latest
-      steps:
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        with:
-          image: harshametla/new1
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+            
+          - name: uploading
+          - uses: mr-smithers-excellent/docker-build-push@v5
+            with:
+              image: harshametla/new
+              registry: docker.io
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_PASSWORD }}
