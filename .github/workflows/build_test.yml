@@ -8,7 +8,36 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  depchecktest:
+    runs-on: ubuntu-latest
+    name: depecheck_test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.2
+        with:
+         maven-version: 3.8.2
+      - name: Maven
+        run: mvn clean package -f pom.xml
+     
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'Hello1'
+          path: '.'
+          format: 'HTML'    
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+           name: Depcheck report
+           path: ${{github.workspace}}/reports
+           
+ test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +51,7 @@ jobs:
       run: |
         cd myapp
         python3 manage.py test
-        
-  job_3:
+ job_3:
       name:  building image and pushing into repository
       needs: test
       runs-on: ubuntu-latest
