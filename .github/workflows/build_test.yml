@@ -16,7 +16,7 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
-          project: 'Hello1'
+          project: 'django_actions_demo'
           path: '.'
           format: 'HTML'    
           args: >
